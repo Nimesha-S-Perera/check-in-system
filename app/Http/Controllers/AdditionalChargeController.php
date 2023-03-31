@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\AdditionalChargeResource;
 use App\Models\additionalCharge;
 use App\Http\Requests\StoreadditionalChargeRequest;
 use App\Http\Requests\UpdateadditionalChargeRequest;
@@ -13,7 +14,8 @@ class AdditionalChargeController extends Controller
      */
     public function index()
     {
-        //
+        $additionalCharge = additionalCharge::all();
+        return AdditionalChargeResource::collection($additionalCharge);
     }
 
     /**

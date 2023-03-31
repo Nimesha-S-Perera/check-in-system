@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\RateResource;
 use App\Models\rate;
 use App\Http\Requests\StorerateRequest;
 use App\Http\Requests\UpdaterateRequest;
@@ -13,7 +14,8 @@ class RateController extends Controller
      */
     public function index()
     {
-        //
+        $rates = rate::all();
+        return RateResource::collection($rates);
     }
 
     /**

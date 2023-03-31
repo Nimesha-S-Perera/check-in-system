@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id('id');
             //0 = FB, 1 = BB
             $table->tinyInteger("stayType");
-            $table->float("roomSuite");
-            $table->float("deluxe");
+            $table->String("roomSuite");
+            $table->float("price");
             $table->timestamps();
         });
     }

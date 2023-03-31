@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ChangeResource;
 use App\Models\change;
 use App\Http\Requests\StorechangeRequest;
 use App\Http\Requests\UpdatechangeRequest;
@@ -13,7 +14,8 @@ class ChangeController extends Controller
      */
     public function index()
     {
-        //
+        $changes = change::all();
+        return ChangeResource::collection($changes);
     }
 
     /**

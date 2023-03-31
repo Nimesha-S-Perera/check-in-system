@@ -9,7 +9,7 @@ class BookingTest extends TestCase
     /**
      * A basic test example.
      */
-    public function test_if_all_bookings_details_can_view(): void
+    public function test_if_all_bookings_can_view(): void
     {
         $response = $this->get('api/bookings');
         $bookingsdetails = $response->json();

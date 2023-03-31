@@ -10,10 +10,13 @@ use Illuminate\Support\Facades\DB;
 
 class BookingController extends Controller
 {
+    //To view all booking details
     public function index(){
-
+        $bookings = booking::with('room', 'guest')->get();
+        return BookingResource::collection($bookings);
     }
     //To view all booking details
+    /*
     public function to_view_all_booking_data()
     {
         $bookings = DB::table('rooms')
@@ -25,7 +28,7 @@ class BookingController extends Controller
 
         $bookingCollection = collect($bookings);
         return $bookingCollection;
-    }
+    }*/
 
     //To view room details with only current guest details
     public function view_room_details_with_current_guest()
@@ -97,8 +100,18 @@ class BookingController extends Controller
                 ->get()->first()->roomNo;
 */
             //to insert data to booking table
-            DB::table('bookings')->insert([
+            $bookingID = DB::table('bookings')->insertGetId([
                 'roomID' => $roomID,
+                'guestID' => $guest,
+                'userID' => $userID,
+                'checkInDate' => $checkInDate,
+                'checkOutDate' => $checkOutDate,
+                'actualCheckOutDate' => $actualCheckOutDate,
+                'stayType' => $stayType,
+            ]);
+
+            DB::table('payments')->insert([
+                'bookingID' => $bookingID,
                 'guestID' => $guest,
                 'userID' => $userID,
                 'checkInDate' => $checkInDate,

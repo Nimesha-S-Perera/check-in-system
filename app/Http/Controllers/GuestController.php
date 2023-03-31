@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\GuestResource;
 use App\Models\guest;
 use App\Http\Requests\StoreguestRequest;
 use App\Http\Requests\UpdateguestRequest;
@@ -13,7 +14,8 @@ class GuestController extends Controller
      */
     public function index()
     {
-        //
+        $guests = guest::all();
+        return GuestResource::collection($guests);
     }
 
     /**
@@ -51,9 +53,11 @@ class GuestController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateguestRequest $request, guest $guest)
+    public function update(UpdateguestRequest $request, int $id)
     {
-        //
+        $update_guest = guest::Find($id);
+        $update_guest->update($request->all());
+        $update_guest->save();
     }
 
     /**

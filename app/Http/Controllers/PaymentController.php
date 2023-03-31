@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreroomRequest;
+use App\Http\Resources\PaymentResource;
 use App\Models\payment;
 use App\Http\Requests\StorepaymentRequest;
 use App\Http\Requests\UpdatepaymentRequest;
@@ -10,6 +11,12 @@ use Illuminate\Support\Facades\DB;
 
 class PaymentController extends Controller
 {
+    public function index()
+    {
+        $payments = payment::all();
+        return PaymentResource::collection($payments);
+    }
+
     //To add the total and subtotal to the payment table
     public function to_insert_payment_data(StoreroomRequest $request)
     {
@@ -27,10 +34,7 @@ class PaymentController extends Controller
         return $availableRoomCollection;
     }
 
-    public function index()
-    {
-        //
-    }
+
 
     /**
      * Show the form for creating a new resource.

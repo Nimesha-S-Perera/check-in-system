@@ -16,27 +16,30 @@ class RateFactory extends Factory
      */
     public function definition(): array
     {
-        //0 = fb, 1 = bb
-        $stayType = $this->faker->unique()->randomElement(['0', '1']);
-        $standard = 0;
-        $deluxe = 0;
+        //0 = FB, 1 = BB
+        $stayType = $this->faker->optional(weight: 0.5,default: true)->randomElement(['0', '1']);
+        //0 = standard, 1 = deluxe
+        $roomSuite = $this->faker->optional(weight: 0.5,default: true)->randomElement(['0', '1']);
+        $price = 0;
         $standardFB = 25000;
         $standardBB = 15000;
         $deluxeFB = 40000;
         $deluxeBB = 25000;
 
-        if($stayType == "0"){
-            $standard = $standardFB;
-            $deluxe = $deluxeFB;
-        }else if ($stayType == "1"){
-            $standard = $standardBB;
-            $deluxe = $deluxeBB;
+        if($stayType == "0" && $roomSuite = "0"){
+            $price = $standardFB;
+        }else if ($stayType == "0" && $roomSuite = "1"){
+            $price = $deluxeFB;
+        }else if ($stayType == "1" && $roomSuite = "0"){
+            $price = $standardBB;
+        }else if ($stayType == "1" && $roomSuite = "1"){
+            $price = $deluxeBB;
         }
 
         return [
             'stayType' => $stayType,
-            'standard' => $standard,
-            'deluxe' => $deluxe,
+            'roomSuite' => $roomSuite,
+            'price' => $price,
         ];
     }
 }

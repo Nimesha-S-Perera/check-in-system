@@ -7,6 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class guest extends Model
 {
+    protected $primaryKey = 'id';
+    protected $table = 'guests';
     use HasFactory;
 
+    public function booking()
+    {
+        return $this->hasMany('App\Models\booking');
+    }
+
+    protected $fillable = [
+        'name',
+        'nic',
+        'contact_number',
+    ];
 }
