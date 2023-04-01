@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rates', function (Blueprint $table) {
-            $table->id('id');
-            //0 = FB, 1 = BB
-            $table->tinyInteger("stayType");
-            $table->String("roomSuite");
-            $table->float("price");
+        Schema::create('taxes', function (Blueprint $table) {
+            $table->id();
+            $table->string("name");
+            $table->float("taxRate");
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('rates');
+        Schema::dropIfExists('taxes');
     }
 };

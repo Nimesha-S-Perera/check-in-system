@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rooms', function (Blueprint $table) {
-            $table->id("roomNo");
-            //0 = standard, 1 = deluxe
-            $table->tinyInteger("roomSuite");
-            //0 = available, 1 = booked
-            $table->tinyInteger("status")->default('0');
+        Schema::create('packages', function (Blueprint $table) {
+            $table->id();
+            //0 = FB, 1 = BB
+            $table->tinyInteger("stayType");
+            $table->String("roomSuite");
+            $table->float("price");
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('rooms');
+        Schema::dropIfExists('packages');
     }
 };

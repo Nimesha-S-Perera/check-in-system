@@ -11,19 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('payments', function (Blueprint $table) {
+        Schema::create('invoices', function (Blueprint $table) {
             $table->id('id');
             $table->unsignedBigInteger('bookingID');
             $table->foreign('bookingID')->references('id')->on('bookings');
-            $table->unsignedBigInteger('rateID');
-            $table->foreign('rateID')->references('id')->on('rates');
-            $table->unsignedBigInteger('additionalChargeID')->nullable();
-            $table->foreign('additionalChargeID')->references('id')->on('additional_charges');
-            $table->float("subTotal");
-            $table->float("taxRate");
+            $table->unsignedBigInteger('packageID');
+            $table->foreign('packageID')->references('id')->on('packages');
+            $table->unsignedBigInteger('taxID')->nullable();
+            $table->foreign('taxID')->references('id')->on('taxes');
             $table->float("total");
-            $table->float("balance");
-            $table->integer("paymentMethod");
+            $table->tinyInteger("status");
+            $table->float("discount");
             $table->dateTime('paymentDate', $precision = 0);
             $table->timestamps();
         });
@@ -34,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('payments');
+        Schema::dropIfExists('invoices');
     }
 };

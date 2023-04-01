@@ -2,20 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\RateResource;
-use App\Models\rate;
-use App\Http\Requests\StorerateRequest;
-use App\Http\Requests\UpdaterateRequest;
+use App\Models\ChangeLogDetails;
+use App\Http\Requests\StoreChangeLogDetailsRequest;
+use App\Http\Requests\UpdateChangeLogDetailsRequest;
 
-class RateController extends Controller
+class ChangeLogDetailsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $rates = rate::all();
-        return RateResource::collection($rates);
+        //
     }
 
     /**
@@ -29,7 +27,7 @@ class RateController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorerateRequest $request)
+    public function store(StoreChangeLogDetailsRequest $request)
     {
         //
     }
@@ -37,7 +35,7 @@ class RateController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(rate $rate)
+    public function show(ChangeLogDetails $changeLogDetails)
     {
         //
     }
@@ -45,7 +43,7 @@ class RateController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(rate $rate)
+    public function edit(ChangeLogDetails $changeLogDetails)
     {
         //
     }
@@ -53,7 +51,7 @@ class RateController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdaterateRequest $request, rate $rate)
+    public function update(UpdateChangeLogDetailsRequest $request, ChangeLogDetails $changeLogDetails)
     {
         //
     }
@@ -61,7 +59,7 @@ class RateController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(rate $rate)
+    public function destroy(ChangeLogDetails $changeLogDetails)
     {
         //
     }

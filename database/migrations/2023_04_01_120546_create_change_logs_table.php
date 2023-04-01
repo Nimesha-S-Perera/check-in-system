@@ -11,16 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('changes', function (Blueprint $table) {
-            $table->id('id');
-            $table->unsignedBigInteger('guestID');
-            $table->foreign('guestID')->references('id')->on('guests');
+        Schema::create('change_logs', function (Blueprint $table) {
+            $table->id();
             $table->unsignedBigInteger('userID');
             $table->foreign('userID')->references('id')->on('users');
-            $table->string("columnName",20);
-            $table->string("oldData",125);
-            $table->string("newData",125);
             $table->dateTime('changedDate', $precision = 0);
+            //0 = FB, 1 = BB
+            $table->string("entity",20);
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('changes');
+        Schema::dropIfExists('change_logs');
     }
 };

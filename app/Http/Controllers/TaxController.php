@@ -2,20 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\ChangeResource;
-use App\Models\change;
-use App\Http\Requests\StorechangeRequest;
-use App\Http\Requests\UpdatechangeRequest;
+use App\Models\Tax;
+use App\Http\Requests\StoreTaxRequest;
+use App\Http\Requests\UpdateTaxRequest;
 
-class ChangeController extends Controller
+class TaxController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $changes = change::all();
-        return ChangeResource::collection($changes);
+        //
     }
 
     /**
@@ -29,7 +27,7 @@ class ChangeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorechangeRequest $request)
+    public function store(StoreTaxRequest $request)
     {
         //
     }
@@ -37,7 +35,7 @@ class ChangeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(change $change)
+    public function show(Tax $tax)
     {
         //
     }
@@ -45,7 +43,7 @@ class ChangeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(change $change)
+    public function edit(Tax $tax)
     {
         //
     }
@@ -53,7 +51,7 @@ class ChangeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatechangeRequest $request, change $change)
+    public function update(UpdateTaxRequest $request, Tax $tax)
     {
         //
     }
@@ -61,7 +59,7 @@ class ChangeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(change $change)
+    public function destroy(Tax $tax)
     {
         //
     }

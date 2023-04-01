@@ -15,9 +15,11 @@ return new class extends Migration
             $table->id('id');
             $table->string("name",100);
             $table->string("email",125);
-            //0 = officer, 1 = receptionist
-            $table->tinyInteger("designation");
+            //0 = active, 1 = inactive
+            $table->tinyInteger("status");
             $table->string('password',50);
+            $table->unsignedBigInteger('roleID');
+            $table->foreign('roleID')->references('id')->on('roles');
             $table->timestamps();
         });
     }
