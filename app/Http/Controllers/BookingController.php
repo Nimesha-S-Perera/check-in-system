@@ -3,53 +3,38 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\BookingResource;
+use App\Http\Resources\RoomWithGuestResource;
 use App\Models\booking;
 use App\Http\Requests\StorebookingRequest;
 use App\Http\Requests\UpdatebookingRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class BookingController extends Controller
 {
-    //To view all booking details
-    public function index(){
-        $bookings = booking::with('room', 'guest')->get();
-        return BookingResource::collection($bookings);
-    }
-    //To view all booking details
-    /*
-    public function to_view_all_booking_data()
-    {
-        $bookings = DB::table('rooms')
-            ->leftJoin('bookings', 'rooms.roomNo', '=', 'bookings.roomID')
-            ->leftJoin('guests', 'bookings.guestID', '=', 'guests.id')
-            ->select('bookings.id','guests.name','guests.nic','guests.contact_number', 'rooms.roomNo', 'rooms.roomSuite', 'rooms.status','bookings.checkInDate','bookings.checkOutDate')
-            ->orderBy('bookings.id', 'asc')
-            ->get();
+    public function index(Request $request){
+        $current_guest_only = $request->get('current_guest_only');
 
-        $bookingCollection = collect($bookings);
-        return $bookingCollection;
-    }*/
+        if ($current_guest_only) {
+            $room_data_with_current_guest = DB::table('rooms')
+                ->leftJoin('bookings', function($join) {
+                    $join->on('rooms.roomNo', '=', 'bookings.roomID')
+                        ->where('rooms.status', 1)
+                        ->whereRaw('bookings.id = (select max(id) from bookings where bookings.roomID = rooms.roomNo)');
+                })
+                ->leftJoin('guests', 'bookings.guestID', '=', 'guests.id')
+                ->select('rooms.*',
+                    DB::raw('IFNULL(guests.name, null) as name'),
+                    DB::raw('IFNULL(guests.nic, null) as nic'),
+                    DB::raw('IFNULL(guests.contact_number, null) as contact_number'))
+                ->orderBy('rooms.roomNo', 'asc')
+                ->get();
 
-    //To view room details with only current guest details
-    public function view_room_details_with_current_guest()
-    {
-        $room_data_with_current_guest = DB::table('rooms')
-            ->leftJoin('bookings', function($join) {
-                $join->on('rooms.roomNo', '=', 'bookings.roomID')
-                    ->where('rooms.status', 1)
-                    ->whereRaw('bookings.id = (select max(id) from bookings where bookings.roomID = rooms.roomNo)');
-            })
-            ->leftJoin('guests', 'bookings.guestID', '=', 'guests.id')
-            ->select('rooms.*',
-                DB::raw('IFNULL(guests.name, null) as name'),
-                DB::raw('IFNULL(guests.nic, null) as nic'),
-                DB::raw('IFNULL(guests.contact_number, null) as contact_number'))
-            ->orderBy('rooms.roomNo', 'asc')
-            ->get();
-
-        return BookingResource::collection($room_data_with_current_guest);
-       // $room_data_with_current_guestCollection = collect($room_data_with_current_guest);
-        //return $room_data_with_current_guestCollection;
+            return RoomWithGuestResource::collection($room_data_with_current_guest);
+        } else {
+            $bookings = Booking::with('room', 'guest')->get();
+            return BookingResource::collection($bookings);
+        }
     }
 
     //To validate check in data when adding a new check in
@@ -100,18 +85,8 @@ class BookingController extends Controller
                 ->get()->first()->roomNo;
 */
             //to insert data to booking table
-            $bookingID = DB::table('bookings')->insertGetId([
+            DB::table('bookings')->insertGetId([
                 'roomID' => $roomID,
-                'guestID' => $guest,
-                'userID' => $userID,
-                'checkInDate' => $checkInDate,
-                'checkOutDate' => $checkOutDate,
-                'actualCheckOutDate' => $actualCheckOutDate,
-                'stayType' => $stayType,
-            ]);
-
-            DB::table('payments')->insert([
-                'bookingID' => $bookingID,
                 'guestID' => $guest,
                 'userID' => $userID,
                 'checkInDate' => $checkInDate,

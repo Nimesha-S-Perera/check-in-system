@@ -50,14 +50,13 @@ Route::get('/guests', [GuestController::class, 'index']);
 //To update an guest
 Route::put('/guest/{id}', [GuestController::class, 'update']);
 
-
 /**
  * APIs for the Booking model
  */
 Route::get('/bookings', [BookingController::class, 'index']);
 
 //To only view room data with current guest
-Route::get('/rooms/guests', [BookingController::class, 'view_room_details_with_current_guest']);
+Route::get('/bookings?current_guest_only=true', [BookingController::class, 'index']);
 
 //To add a new check in
 Route::post('/checkin', [BookingController::class, 'store']);

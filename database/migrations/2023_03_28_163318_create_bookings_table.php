@@ -21,7 +21,7 @@ return new class extends Migration
             $table->foreign('userID')->references('id')->on('users');
             $table->dateTime('checkInDate', $precision = 0);
             $table->dateTime('checkOutDate', $precision = 0);
-            $table->dateTime('actualCheckOutDate', $precision = 0);
+            $table->dateTime('actualCheckOutDate', $precision = 0)->nullable();
             //0 = FB, 1 = BB
             $table->tinyInteger("stayType");
             $table->timestamps();

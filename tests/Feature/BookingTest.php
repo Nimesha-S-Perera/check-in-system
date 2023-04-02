@@ -19,7 +19,7 @@ class BookingTest extends TestCase
 
     public function test_if_current_guests_can_view(): void
     {
-        $response = $this->get('api/rooms/guests');
+        $response = $this->get('api/bookings?current_guest_only=true');
         $currentGuest = $response->json();
         dd($currentGuest);
         $response->assertStatus(200);
@@ -28,10 +28,10 @@ class BookingTest extends TestCase
     public function test_if_new_booking_can_add(): void
     {
         $response = $this->post('api/checkin',[
-            'name' => 'manori Perera',
+            'name' => 'Nimesha Perera',
             'nic' => '123456789012',
             'contact_number' => '0761275746',
-            'roomID' => '21',
+            'roomID' => '24',
             'userID' => '2',
             'checkInDate' => '2023-03-27 11:28:41',
             'checkOutDate' => '2023-03-27 11:28:41',
