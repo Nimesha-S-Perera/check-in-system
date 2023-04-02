@@ -26,16 +26,14 @@ class RoomController extends Controller
     public function to_get_the_available_rooms(StoreroomRequest $request)
     {
         //to get the roomsuite
-        $roomSuite = $request->get('roomSuite');
-        $availableRoom = DB::table('rooms')
-            //0 = available, 1 = booked
-            ->where('status', '=', 0)
-            ->where('roomSuite', '=', $roomSuite)
-            ->select('roomNo')
-            //0 = standard, 1 = deluxe
-            ->get();
+        $roomSuite = $request->input('roomSuite');
 
-        $availableRoomCollection = collect($availableRoom);
+        $availableRooms = Room::where('status', 0)
+            ->where('roomSuite', $roomSuite)
+            ->pluck('roomNo');
+
+        $availableRoomCollection = collect($availableRooms);
+
         return $availableRoomCollection;
     }
 

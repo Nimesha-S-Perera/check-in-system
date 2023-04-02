@@ -19,7 +19,7 @@ class GuestResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'nic' => $this->nic,
-            'contact_number' => $this->contact_number,
+            'contactNumber' => $this->contactNumber,
         ];
     }
 }

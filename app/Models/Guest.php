@@ -19,6 +19,6 @@ class guest extends Model
     protected $fillable = [
         'name',
         'nic',
-        'contact_number',
+        'contactNumber',
     ];
 }

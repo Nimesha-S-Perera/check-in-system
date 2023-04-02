@@ -28,10 +28,10 @@ class BookingTest extends TestCase
     public function test_if_new_booking_can_add(): void
     {
         $response = $this->post('api/checkin',[
-            'name' => 'Nimesha Perera',
+            'name' => 'Sanki Perera',
             'nic' => '123456789012',
-            'contact_number' => '0761275746',
-            'roomID' => '24',
+            'contactNumber' => '0761275746',
+            'roomID' => '20',
             'userID' => '2',
             'checkInDate' => '2023-03-27 11:28:41',
             'checkOutDate' => '2023-03-27 11:28:41',

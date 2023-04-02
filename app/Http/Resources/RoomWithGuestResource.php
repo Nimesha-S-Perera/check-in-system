@@ -21,7 +21,7 @@ class RoomWithGuestResource extends JsonResource
             'guest' => $this->when($this->status == 1, [
                 'name' => $this->name,
                 'nic' => $this->nic,
-                'contact_number' => $this->contact_number
+                'contactNumber' => $this->contactNumber
             ], null)
         ];
 

@@ -19,7 +19,7 @@ class GuestFactory extends Factory
         return [
             'name' => $this->faker->name,
             'nic' => $this->faker->regexify('[0-9]{9}[v]{1}'),
-            'contact_number' => $this->faker->phoneNumber,
+            'contactNumber' => $this->faker->phoneNumber,
         ];
     }
 }

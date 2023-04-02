@@ -7,6 +7,8 @@ use App\Http\Resources\RoomWithGuestResource;
 use App\Models\booking;
 use App\Http\Requests\StorebookingRequest;
 use App\Http\Requests\UpdatebookingRequest;
+use App\Models\guest;
+use App\Models\room;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -26,7 +28,7 @@ class BookingController extends Controller
                 ->select('rooms.*',
                     DB::raw('IFNULL(guests.name, null) as name'),
                     DB::raw('IFNULL(guests.nic, null) as nic'),
-                    DB::raw('IFNULL(guests.contact_number, null) as contact_number'))
+                    DB::raw('IFNULL(guests.contactNumber, null) as contactNumber'))
                 ->orderBy('rooms.roomNo', 'asc')
                 ->get();
 
@@ -42,7 +44,7 @@ class BookingController extends Controller
         return[
             'name' => 'required|string|100',
             'nic' => 'required|string|12',
-            'contact_number' => 'required|string|20',
+            'contactNumber' => 'required|string|20',
             'userID' => 'required|integer',
             'checkInDate' => 'required|date',
             'checkOutDate' => 'required|date',
@@ -50,56 +52,29 @@ class BookingController extends Controller
         ];
     }
     //To add new check in
-    public function store(StorebookingRequest $request)
+    public function store(StorebookingRequest $request, Guest $guest, Booking $booking, Room $room)
     {
-        //Data to insert to guests table
-        $name = $request->input('name');
-        $nic = $request->input('nic');
-        $contactNumber = $request->input('contact_number');
+        $Guest = $guest->create([
+            'name' => $request->input('name'),
+            'nic' => $request->input('nic'),
+            'contactNumber' => $request->input('contactNumber')
+        ]);
 
-        //Data to insert to bookings table
-        $userID = $request->input('userID');
-        $checkInDate = $request->input('checkInDate');
-        $checkOutDate = $request->input('checkOutDate');
-        $actualCheckOutDate = null;
-        //0 = FB, 1 == BB
-        $stayType = $request->input('stayType');
+        $booking->create([
+            'roomID' => $request->input('roomID'),
+            'userID' => $request->input('userID'),
+            'checkInDate' => $request->input('checkInDate'),
+            'checkOutDate' => $request->input('checkOutDate'),
+            'stayType' => $request->input('stayType'),
+            'actualCheckOutDate' => null,
+            'guestID' => $Guest->id
+        ]);
 
-        //To insert roomNo
-        $roomID = $request->input('roomID');
+        $Room = $room->findOrFail($request->input('roomID'));
+        $Room->status = 1;
+        $Room->save();
 
-        DB::transaction(function () use ($roomID, $userID, $checkOutDate, $stayType, $actualCheckOutDate, $checkInDate, $contactNumber, $nic, $name) {
-            //To insert guest data and get the id
-            $guest = DB::table('guests')->insertGetId([
-                'name' => $name,
-                'nic' => $nic,
-                'contact_number' => $contactNumber
-            ]);
-
-            //To see available rooms with the correct room suite
-          /*  $room = DB::table('rooms')
-                //0 = available, 1 = booked
-                ->where('status', '=', 0)
-                ->where('roomSuite', '=', $roomSuite)
-                //0 = standard, 1 = deluxe
-                ->get()->first()->roomNo;
-*/
-            //to insert data to booking table
-            DB::table('bookings')->insertGetId([
-                'roomID' => $roomID,
-                'guestID' => $guest,
-                'userID' => $userID,
-                'checkInDate' => $checkInDate,
-                'checkOutDate' => $checkOutDate,
-                'actualCheckOutDate' => $actualCheckOutDate,
-                'stayType' => $stayType,
-            ]);
-
-            //to update the status of the room
-            DB::table('rooms')
-                ->where('roomNo', '=', $roomID)
-                ->update(['status' => 1]);
-        });
+        DB::commit();
     }
 
     public function create()

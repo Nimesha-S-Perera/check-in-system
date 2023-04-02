@@ -20,4 +20,13 @@ class booking extends Model
     {
         return $this->belongsTo('App\Models\guest','guestID');
     }
+    protected $fillable = [
+        'roomID',
+        'guestID',
+        'userID',
+        'checkInDate',
+        'checkOutDate',
+        'actualCheckOutDate',
+        'stayType',
+    ];
 }
