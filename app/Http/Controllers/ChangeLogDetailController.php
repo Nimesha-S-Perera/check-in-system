@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ChangeLogDetails;
+use App\Http\Resources\ChangeLogDetailResource;
+use App\Models\ChangeLogDetail;
 use App\Http\Requests\StoreChangeLogDetailsRequest;
 use App\Http\Requests\UpdateChangeLogDetailsRequest;
 
-class ChangeLogDetailsController extends Controller
+class ChangeLogDetailController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $changeLogDetails = ChangeLogDetail::all();
+        return ChangeLogDetailResource::collection($changeLogDetails);
     }
 
     /**
@@ -35,7 +37,7 @@ class ChangeLogDetailsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ChangeLogDetails $changeLogDetails)
+    public function show(ChangeLogDetail $changeLogDetails)
     {
         //
     }
@@ -43,7 +45,7 @@ class ChangeLogDetailsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ChangeLogDetails $changeLogDetails)
+    public function edit(ChangeLogDetail $changeLogDetails)
     {
         //
     }
@@ -51,7 +53,7 @@ class ChangeLogDetailsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateChangeLogDetailsRequest $request, ChangeLogDetails $changeLogDetails)
+    public function update(UpdateChangeLogDetailsRequest $request, ChangeLogDetail $changeLogDetails)
     {
         //
     }
@@ -59,7 +61,7 @@ class ChangeLogDetailsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ChangeLogDetails $changeLogDetails)
+    public function destroy(ChangeLogDetail $changeLogDetails)
     {
         //
     }

@@ -16,8 +16,14 @@ class PackageFactory extends Factory
      */
     public function definition(): array
     {
+        $stayType = 1;
+        $roomSuite = 1;
+        $price = 25000;
+
         return [
-            //
+            'stayType' => $stayType,
+            'roomSuite' => $roomSuite,
+            'price' => $price,
         ];
     }
 }

@@ -1,12 +1,15 @@
 <?php
 
-use App\Http\Controllers\AdditionalChargeController;
 use App\Http\Controllers\BookingController;
-use App\Http\Controllers\ChangeController;
+use App\Http\Controllers\ChangeLogController;
+use App\Http\Controllers\ChangeLogDetailController;
 use App\Http\Controllers\GuestController;
-use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\RateController;
+use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\InvoiceDetailController;
+use App\Http\Controllers\PackageController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\TaxController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -29,7 +32,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 /**
  * APIs for the Room model
  */
-//To view all rooms
 Route::get('/rooms', [RoomController::class, 'index']);
 
 //To view available rooms with correct room suite
@@ -38,13 +40,11 @@ Route::post('/rooms/available', [RoomController::class, 'to_get_the_available_ro
 /**
  * APIs for the User model
  */
-//To view all users
 Route::get('/users', [UserController::class, 'index']);
 
 /**
  * APIs for the Guest model
  */
-//To view all guests
 Route::get('/guests', [GuestController::class, 'index']);
 
 //To update an guest
@@ -54,7 +54,6 @@ Route::put('/guest/{id}', [GuestController::class, 'update']);
 /**
  * APIs for the Booking model
  */
-//To view all bookings
 Route::get('/bookings', [BookingController::class, 'index']);
 
 //To only view room data with current guest
@@ -63,37 +62,37 @@ Route::get('/rooms/guests', [BookingController::class, 'view_room_details_with_c
 //To add a new check in
 Route::post('/checkin', [BookingController::class, 'store']);
 
+/**
+ * APIs for the Tax model
+ */
+Route::get('/taxes', [TaxController::class, 'index']);
 
 /**
- * APIs for the Change model
+ * APIs for the Role model
  */
-//To view all changes
-Route::get('/changes', [ChangeController::class, 'index']);
+Route::get('/roles', [RoleController::class, 'index']);
 
 /**
- * APIs for the Rate model
+ * APIs for the Package model
  */
-//To view all rates
-Route::get('/rates', [RateController::class, 'index']);
+Route::get('/packages', [PackageController::class, 'index']);
 
 /**
- * APIs for the AdditonalCharge model
+ * APIs for the Invoice model
  */
-//To view all additionl charges
-Route::get('/additionlcharges', [AdditionalChargeController::class, 'index']);
+Route::get('/invoices', [InvoiceController::class, 'index']);
 
 /**
- * APIs for the Payment model
+ * APIs for the InvoiceDetail model
  */
-//To view all payments
-Route::get('/payments', [PaymentController::class, 'index']);
+Route::get('/invoiceDetails', [InvoiceDetailController::class, 'index']);
 
+/**
+ * APIs for the ChangeLog model
+ */
+Route::get('/changeLogs', [ChangeLogController::class, 'index']);
 
-
-
-
-
-
-
-
-
+/**
+ * APIs for the ChangeLogDetail model
+ */
+Route::get('/changeLogDetails', [ChangeLogDetailController::class, 'index']);

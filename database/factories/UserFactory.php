@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Role;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -20,9 +21,10 @@ class UserFactory extends Factory
         return [
             'name' => $this->faker->name,
             'email' => $this->faker->email,
-            //0 = officer, 1 = receptionist
-            'designation' => $this->faker->randomElement(['0', '1']),
+            //0 = active, 1 = inactive
+            'status' => $this->faker->randomElement(['0', '1']),
             'password' => $this->faker->password,
+            'roleID' => $this->faker->randomElement(Role::pluck('id')),
         ];
     }
 

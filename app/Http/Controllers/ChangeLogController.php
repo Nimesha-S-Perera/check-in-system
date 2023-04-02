@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ChangeLogResource;
 use App\Models\ChangeLog;
 use App\Http\Requests\StoreChangeLogRequest;
 use App\Http\Requests\UpdateChangeLogRequest;
@@ -13,7 +14,8 @@ class ChangeLogController extends Controller
      */
     public function index()
     {
-        //
+        $changeLog = ChangeLog::all();
+        return ChangeLogResource::collection($changeLog);
     }
 
     /**

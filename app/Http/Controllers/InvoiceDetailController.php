@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\InvoiceDetails;
+use App\Http\Resources\InvoiceDetailResource;
+use App\Models\InvoiceDetail;
 use App\Http\Requests\StoreInvoiceDetailsRequest;
 use App\Http\Requests\UpdateInvoiceDetailsRequest;
 
-class InvoiceDetailsController extends Controller
+class InvoiceDetailController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $invoiceDetails = InvoiceDetail::all();
+        return InvoiceDetailResource::collection($invoiceDetails);
     }
 
     /**
@@ -35,7 +37,7 @@ class InvoiceDetailsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(InvoiceDetails $invoiceDetails)
+    public function show(InvoiceDetail $invoiceDetails)
     {
         //
     }
@@ -43,7 +45,7 @@ class InvoiceDetailsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(InvoiceDetails $invoiceDetails)
+    public function edit(InvoiceDetail $invoiceDetails)
     {
         //
     }
@@ -51,7 +53,7 @@ class InvoiceDetailsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateInvoiceDetailsRequest $request, InvoiceDetails $invoiceDetails)
+    public function update(UpdateInvoiceDetailsRequest $request, InvoiceDetail $invoiceDetails)
     {
         //
     }
@@ -59,7 +61,7 @@ class InvoiceDetailsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(InvoiceDetails $invoiceDetails)
+    public function destroy(InvoiceDetail $invoiceDetails)
     {
         //
     }

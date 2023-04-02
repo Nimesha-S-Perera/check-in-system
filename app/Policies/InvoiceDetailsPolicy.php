@@ -2,7 +2,7 @@
 
 namespace App\Policies;
 
-use App\Models\InvoiceDetails;
+use App\Models\InvoiceDetail;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
@@ -19,7 +19,7 @@ class InvoiceDetailsPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, InvoiceDetails $invoiceDetails): bool
+    public function view(User $user, InvoiceDetail $invoiceDetails): bool
     {
         //
     }
@@ -35,7 +35,7 @@ class InvoiceDetailsPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, InvoiceDetails $invoiceDetails): bool
+    public function update(User $user, InvoiceDetail $invoiceDetails): bool
     {
         //
     }
@@ -43,7 +43,7 @@ class InvoiceDetailsPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, InvoiceDetails $invoiceDetails): bool
+    public function delete(User $user, InvoiceDetail $invoiceDetails): bool
     {
         //
     }
@@ -51,7 +51,7 @@ class InvoiceDetailsPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, InvoiceDetails $invoiceDetails): bool
+    public function restore(User $user, InvoiceDetail $invoiceDetails): bool
     {
         //
     }
@@ -59,7 +59,7 @@ class InvoiceDetailsPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, InvoiceDetails $invoiceDetails): bool
+    public function forceDelete(User $user, InvoiceDetail $invoiceDetails): bool
     {
         //
     }

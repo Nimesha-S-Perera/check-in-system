@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\TaxResource;
 use App\Models\Tax;
 use App\Http\Requests\StoreTaxRequest;
 use App\Http\Requests\UpdateTaxRequest;
@@ -13,7 +14,8 @@ class TaxController extends Controller
      */
     public function index()
     {
-        //
+        $taxes = Tax::all();
+        return TaxResource::collection($taxes);
     }
 
     /**
