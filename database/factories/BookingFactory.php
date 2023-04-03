@@ -33,8 +33,7 @@ class BookingFactory extends Factory
             'checkInDate' => $this->faker->dateTimeBetween($startDate = '-1 days', $endDate = 'now', $timezone = null),
             'checkOutDate' => $this->faker->dateTimeBetween($startDate = '+2 days', $endDate = '+5 days', $timezone = null),
             'actualCheckOutDate' => $this->faker->dateTimeBetween($startDate = '+2 days', $endDate = '+5 days', $timezone = null),
-            //0 = FB, 1 = BB
-            'stayType' => $this->faker->randomElement(['0', '1']),
+            'stayType' => $this->faker->randomElement(['FB', 'BB']),
         ];
     }
 }

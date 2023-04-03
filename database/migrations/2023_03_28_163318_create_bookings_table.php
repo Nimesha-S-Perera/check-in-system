@@ -23,7 +23,7 @@ return new class extends Migration
             $table->dateTime('actualCheckOutDate', $precision = 0)->nullable();
             $table->unsignedBigInteger('userID');
             $table->foreign('userID')->references('id')->on('users');
-            $table->timestamp('created_at');
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 

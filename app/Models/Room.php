@@ -16,6 +16,7 @@ class room extends Model
     {
         return $this->hasOne('App\Models\guest', 'roomID' ,'roomNo');
     }*/
+    public $timestamps = false;
 
     public function booking()
     {

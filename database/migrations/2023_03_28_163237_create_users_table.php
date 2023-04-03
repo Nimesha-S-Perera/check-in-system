@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('roleID');
             $table->foreign('roleID')->references('id')->on('roles');
             $table->enum('status', [0 => 'Active', 1 => 'Inactive'])->nullable()->default(null);
-            $table->timestamp('created_at');
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 

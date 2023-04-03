@@ -21,8 +21,7 @@ class UserFactory extends Factory
         return [
             'name' => $this->faker->name,
             'email' => $this->faker->email,
-            //0 = active, 1 = inactive
-            'status' => $this->faker->randomElement(['0', '1']),
+            'status' => $this->faker->randomElement(['Active', 'Inactive']),
             'password' => $this->faker->password,
             'roleID' => $this->faker->randomElement(Role::pluck('id')),
         ];

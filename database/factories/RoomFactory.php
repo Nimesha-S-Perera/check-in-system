@@ -18,10 +18,8 @@ class RoomFactory extends Factory
     {
         return [
             'roomNo' => $this->faker->unique()->numberBetween(10,39),
-            //0 = deluxe, 1 = standard
-            'roomSuite' => $this->faker->randomElement(['0', '1'],30),
-            //0 = available, 1 = booked
-            'status' => $this->faker->randomElement(['0', '1']),
+            'roomType' => $this->faker->randomElement(array_merge(array_fill(0, 15, 'Standard'), array_fill(0, 15, 'Deluxe'))),
+            'status' => $this->faker->randomElement(['Available', 'Booked']),
         ];
     }
 }

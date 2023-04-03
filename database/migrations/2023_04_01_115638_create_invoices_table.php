@@ -23,7 +23,7 @@ return new class extends Migration
             $table->float("total");
             $table->dateTime('paymentDate', $precision = 0);
             $table->enum('status', [0 => 'Paid', 1 => 'Unpaid'])->nullable()->default(null);
-            $table->timestamp('created_at');
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 

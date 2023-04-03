@@ -19,7 +19,7 @@ return new class extends Migration
             $table->float("quantity");
             $table->float("unitPrice");
             $table->float("total");
-            $table->timestamp('created_at');
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 

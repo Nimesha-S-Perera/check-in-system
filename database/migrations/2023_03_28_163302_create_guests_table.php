@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string("name",100);
             $table->string("nic",12);
             $table->string("contactNumber",20);
-            $table->timestamp('created_at');
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 

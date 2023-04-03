@@ -17,7 +17,7 @@ return new class extends Migration
             $table->dateTime('changedDate', $precision = 0);
             $table->unsignedBigInteger('userID');
             $table->foreign('userID')->references('id')->on('users');
-            $table->timestamp('created_at');
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 

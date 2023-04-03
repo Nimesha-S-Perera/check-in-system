@@ -17,8 +17,7 @@ class RoleFactory extends Factory
     public function definition(): array
     {
         return [
-            //0 = Front desk officer, 1 = receptionist
-            'roleType' => $this->faker->unique()->randomElement(['0', '1']),
+            'roleType' => $this->faker->unique()->randomElement(['Receptionist', 'Frontend Officer']),
         ];
     }
 }

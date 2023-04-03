@@ -16,7 +16,7 @@ return new class extends Migration
             $table->enum('stayType', [0 => 'FB', 1 => 'BB'])->nullable()->default(null);
             $table->enum('roomType', [0 => 'Standard', 1 => 'Deluxe'])->nullable()->default(null);
             $table->float("price");
-            $table->timestamp('created_at');
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 

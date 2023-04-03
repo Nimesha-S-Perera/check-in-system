@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id("roomNo");
             $table->enum('roomType', [0 => 'Standard', 1 => 'Deluxe'])->nullable()->default(null);
             $table->enum('status', [0 => 'Available', 1 => 'Booked'])->nullable()->default(null);
-            $table->timestamp('created_at');
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 

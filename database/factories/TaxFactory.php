@@ -19,7 +19,7 @@ class TaxFactory extends Factory
         $taxRate = 10;
 
         return [
-            'name' => $this->faker->unique()->randomElement(['0']),
+            'name' => $this->faker->unique()->randomElement(['VAT']),
             'taxRate' => $taxRate,
         ];
     }

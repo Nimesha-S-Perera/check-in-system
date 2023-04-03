@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ChangeLog extends Model
 {
+    public $timestamps = false;
     use HasFactory;
 
 
