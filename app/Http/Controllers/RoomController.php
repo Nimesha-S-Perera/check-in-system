@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Http\Requests\StorebookingRequest;
 use App\Http\Resources\RoomResource;
 use App\Models\room;
@@ -22,8 +23,11 @@ class RoomController extends Controller
         return RoomResource::collection($rooms);
     }
 
+    /**
+     * Display the specified resource.
+     */
     //To get the available rooms
-    public function to_get_the_available_rooms(StoreroomRequest $request)
+    public function show(StoreroomRequest $request)
     {
         //to get the roomsuite
         $roomSuite = $request->input('roomSuite');
@@ -35,6 +39,21 @@ class RoomController extends Controller
         $availableRoomCollection = collect($availableRooms);
 
         return $availableRoomCollection;
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    //To update the room status after checkout
+    public function update(UpdateroomRequest $request, room $room)
+    {
+        //$checkOutDate = $request->input('checkOutDate');
+        //$dateTime = Carbon::now()->format('Y-m-d');
+
+        //if checkout date == today
+        $Room = $room->findOrFail($request->input('roomNo'));
+        $Room->status = 0;
+        $Room->save();
     }
 
     /**
@@ -54,14 +73,6 @@ class RoomController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(room $room)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit(room $room)
@@ -69,13 +80,7 @@ class RoomController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateroomRequest $request, room $room)
-    {
-        //
-    }
+
 
     /**
      * Remove the specified resource from storage.

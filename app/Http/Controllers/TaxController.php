@@ -19,6 +19,16 @@ class TaxController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     */
+    //to send tax rate to front end
+    public function show()
+    {
+        $tax = Tax::get();
+        return TaxResource::collection($tax);
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()
@@ -34,13 +44,7 @@ class TaxController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Tax $tax)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -53,9 +57,11 @@ class TaxController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTaxRequest $request, Tax $tax)
+    public function update(UpdateTaxRequest $request, int $id)
     {
-        //
+        $updateTax = Tax::Find($id);
+        $updateTax->update($request->all());
+        $updateTax->save();
     }
 
     /**

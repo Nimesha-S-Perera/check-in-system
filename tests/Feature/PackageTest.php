@@ -16,4 +16,10 @@ class PackageTest extends TestCase
         dd($bookingsdetails);
         $response->assertStatus(200);
     }
+
+    public function test_if_package_can_update(): void
+    {
+        $response = $this->put('api/package/2',['' => '']);
+        $response->assertStatus(200);
+    }
 }

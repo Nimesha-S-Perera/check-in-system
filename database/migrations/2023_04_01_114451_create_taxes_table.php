@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('taxes', function (Blueprint $table) {
             $table->id();
-            $table->integer("name");
+            $table->string("name");
             $table->float("taxRate");
-            $table->timestamps();
+            $table->index('taxRate');
+            $table->timestamp('created_at');
         });
     }
 

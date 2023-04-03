@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::create('roles', function (Blueprint $table) {
             $table->id();
-            //0 = reseptionist, 1 = frontend officer
-            $table->tinyInteger("roleType");
-            $table->timestamps();
+            $table->enum('roleType', [0 => 'Receptionist', 1 => 'Frontend Officer'])->nullable()->default(null);
+            $table->timestamp('created_at');
         });
     }
 

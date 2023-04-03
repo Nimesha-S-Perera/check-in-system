@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string("property",20);
             $table->string("oldValue",200);
             $table->string("newValue",200);
-            $table->timestamps();
+
         });
     }
 

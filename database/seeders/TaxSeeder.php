@@ -13,6 +13,6 @@ class TaxSeeder extends Seeder
      */
     public function run(): void
     {
-        Tax::factory()->count(2)->create();
+        Tax::factory()->count(1)->create();
     }
 }

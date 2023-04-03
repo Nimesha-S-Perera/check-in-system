@@ -31,7 +31,7 @@ class GuestController extends Controller
      */
     public function store(StoreguestRequest $request)
     {
-        //
+        guest::create($request->all());
     }
 
     /**
@@ -55,9 +55,9 @@ class GuestController extends Controller
      */
     public function update(UpdateguestRequest $request, int $id)
     {
-        $update_guest = guest::Find($id);
-        $update_guest->update($request->all());
-        $update_guest->save();
+        $updateGuest = guest::Find($id);
+        $updateGuest->update($request->all());
+        $updateGuest->save();
     }
 
     /**

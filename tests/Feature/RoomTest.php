@@ -30,4 +30,13 @@ class RoomTest extends TestCase
         $response->assertStatus(200);
     }
 
+    //To update the room status after check out
+    public function test_if_room_status_can_update_after_check_out(): void
+    {
+        $response = $this->post('api/update/rooms',[
+            'roomNo' => '11',
+        ]);
+        $response->assertStatus(200);
+    }
+
 }

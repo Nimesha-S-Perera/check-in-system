@@ -53,9 +53,11 @@ class RoleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateRoleRequest $request, Role $role)
+    public function update(UpdateRoleRequest $request, int $id)
     {
-        //
+        $updateRole = Role::Find($id);
+        $updateRole->update($request->all());
+        $updateRole->save();
     }
 
     /**

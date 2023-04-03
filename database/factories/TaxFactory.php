@@ -16,10 +16,11 @@ class TaxFactory extends Factory
      */
     public function definition(): array
     {
+        $taxRate = 10;
+
         return [
-            //0 = VAT, 1 = GST
-            'name' => $this->faker->unique()->randomElement(['0', '1']),
-            'taxRate' => $this->faker->biasedNumberBetween(0,60),
+            'name' => $this->faker->unique()->randomElement(['0']),
+            'taxRate' => $taxRate,
         ];
     }
 }

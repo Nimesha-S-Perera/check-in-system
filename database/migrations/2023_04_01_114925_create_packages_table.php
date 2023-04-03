@@ -13,11 +13,10 @@ return new class extends Migration
     {
         Schema::create('packages', function (Blueprint $table) {
             $table->id();
-            //0 = FB, 1 = BB
-            $table->tinyInteger("stayType");
-            $table->tinyInteger("roomSuite");
+            $table->enum('stayType', [0 => 'FB', 1 => 'BB'])->nullable()->default(null);
+            $table->enum('roomType', [0 => 'Standard', 1 => 'Deluxe'])->nullable()->default(null);
             $table->float("price");
-            $table->timestamps();
+            $table->timestamp('created_at');
         });
     }
 

@@ -16,4 +16,10 @@ class UserTest extends TestCase
         dd($bookingsdetails);
         $response->assertStatus(200);
     }
+
+    public function test_if_user_can_update(): void
+    {
+        $response = $this->put('api/user/2',['' => '']);
+        $response->assertStatus(200);
+    }
 }

@@ -17,13 +17,13 @@ return new class extends Migration
             $table->foreign('bookingID')->references('id')->on('bookings');
             $table->unsignedBigInteger('packageID');
             $table->foreign('packageID')->references('id')->on('packages');
-            $table->unsignedBigInteger('taxID')->nullable();
-            $table->foreign('taxID')->references('id')->on('taxes');
-            $table->float("total");
-            $table->tinyInteger("status");
+            $table->unsignedFloat('tax')->nullable();
+            $table->foreign('tax')->references('taxRate')->on('taxes');
             $table->float("discount");
+            $table->float("total");
             $table->dateTime('paymentDate', $precision = 0);
-            $table->timestamps();
+            $table->enum('status', [0 => 'Paid', 1 => 'Unpaid'])->nullable()->default(null);
+            $table->timestamp('created_at');
         });
     }
 

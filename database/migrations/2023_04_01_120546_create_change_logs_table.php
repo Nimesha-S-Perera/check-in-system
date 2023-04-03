@@ -13,12 +13,11 @@ return new class extends Migration
     {
         Schema::create('change_logs', function (Blueprint $table) {
             $table->id();
+            $table->string("entity",20);
+            $table->dateTime('changedDate', $precision = 0);
             $table->unsignedBigInteger('userID');
             $table->foreign('userID')->references('id')->on('users');
-            $table->dateTime('changedDate', $precision = 0);
-            //0 = FB, 1 = BB
-            $table->string("entity",20);
-            $table->timestamps();
+            $table->timestamp('created_at');
         });
     }
 

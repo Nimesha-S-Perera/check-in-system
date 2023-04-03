@@ -29,9 +29,16 @@ class InvoiceController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreInvoiceRequest $request)
+    public function store(StoreInvoiceRequest $request,Invoice $invoice)
     {
-        //
+        $invoice = new Invoice();
+        $invoice->bookingID = $request->input('bookingID');
+        $invoice->packageID = $request->input('packageID');
+        $invoice->taxID = $request->input('taxID');
+        $invoice->total = $request->input('total');
+        $invoice->paymentDate = $request->input('paymentDate');
+        $invoice->save();
+
     }
 
     /**

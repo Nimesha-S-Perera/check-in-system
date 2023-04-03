@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('invoiceID');
             $table->foreign('invoiceID')->references('id')->on('invoices');
-            $table->float("quantity");
             $table->string("description",100);
+            $table->float("quantity");
             $table->float("unitPrice");
             $table->float("total");
-            $table->timestamps();
+            $table->timestamp('created_at');
         });
     }
 

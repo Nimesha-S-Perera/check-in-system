@@ -16,4 +16,16 @@ class InvoiceTest extends TestCase
         dd($bookingsdetails);
         $response->assertStatus(200);
     }
+
+    public function test_if_invoice_can_add(): void
+    {
+        $response = $this->post('api/add/invoice',[
+            'bookingID' => '1',
+            'packageID' => '1',
+            'taxID' => '1',
+            'total' => '50000',
+            'paymentDate' => '2023-03-27 11:28:41',
+        ]);
+        $response->assertStatus(200);
+    }
 }

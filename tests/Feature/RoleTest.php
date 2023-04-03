@@ -16,4 +16,10 @@ class RoleTest extends TestCase
         dd($bookingsdetails);
         $response->assertStatus(200);
     }
+
+    public function test_if_role_can_update(): void
+    {
+        $response = $this->put('api/role/2',['' => '']);
+        $response->assertStatus(200);
+    }
 }

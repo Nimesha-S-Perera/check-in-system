@@ -15,12 +15,11 @@ return new class extends Migration
             $table->id('id');
             $table->string("name",100);
             $table->string("email",125);
-            //0 = active, 1 = inactive
-            $table->tinyInteger("status");
             $table->string('password',50);
             $table->unsignedBigInteger('roleID');
             $table->foreign('roleID')->references('id')->on('roles');
-            $table->timestamps();
+            $table->enum('status', [0 => 'Active', 1 => 'Inactive'])->nullable()->default(null);
+            $table->timestamp('created_at');
         });
     }
 

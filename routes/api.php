@@ -35,12 +35,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/rooms', [RoomController::class, 'index']);
 
 //To view available rooms with correct room suite
-Route::post('/rooms/available', [RoomController::class, 'to_get_the_available_rooms']);
+Route::post('/rooms/available', [RoomController::class, 'show']);
+
+Route::post('/update/rooms', [RoomController::class, 'update']);
 
 /**
  * APIs for the User model
  */
 Route::get('/users', [UserController::class, 'index']);
+
+//To update an user
+Route::put('/user/{id}', [UserController::class, 'update']);
 
 /**
  * APIs for the Guest model
@@ -66,20 +71,33 @@ Route::post('/checkin', [BookingController::class, 'store']);
  */
 Route::get('/taxes', [TaxController::class, 'index']);
 
+Route::get('/tax', [TaxController::class, 'show']);
+
+//To update an tax
+Route::put('/tax/{id}', [TaxController::class, 'update']);
+
 /**
  * APIs for the Role model
  */
 Route::get('/roles', [RoleController::class, 'index']);
+
+//To update an role
+Route::put('/role/{id}', [RoleController::class, 'update']);
 
 /**
  * APIs for the Package model
  */
 Route::get('/packages', [PackageController::class, 'index']);
 
+//To update an package
+Route::put('/package/{id}', [PackageController::class, 'update']);
+
 /**
  * APIs for the Invoice model
  */
 Route::get('/invoices', [InvoiceController::class, 'index']);
+
+Route::post('/add/invoice', [InvoiceController::class, 'store']);
 
 /**
  * APIs for the InvoiceDetail model

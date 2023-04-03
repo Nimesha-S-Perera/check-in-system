@@ -53,9 +53,11 @@ class PackageController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePackageRequest $request, Package $package)
+    public function update(UpdatePackageRequest $request, int $id)
     {
-        //
+        $updatePackage = Package::Find($id);
+        $updatePackage->update($request->all());
+        $updatePackage->save();
     }
 
     /**
