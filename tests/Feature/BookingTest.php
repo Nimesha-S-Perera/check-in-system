@@ -25,19 +25,27 @@ class BookingTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function test_if_new_booking_can_add(): void
+    public function test_if_new_booking_can_be_added(): void
     {
-        $response = $this->post('api/checkin',[
+        $response = $this->post('api/add/checkin', [
             'name' => 'Sanki Perera',
             'nic' => '123456789012',
             'contactNumber' => '0761275746',
-            'roomID' => '20',
+            'roomID' => '10',
             'userID' => '2',
             'checkInDate' => '2023-03-27 11:28:41',
-            'checkOutDate' => '2023-03-27 11:28:41',
-            //0 = FB, 1 = BB
-            'stayType' => '1',
+            'checkOutDate' => '2023-03-28 11:28:41',
+            'stayType' => 'FB',
+            'packageID' => '1',
+            'total' => '50000',
         ]);
+
+        $response->assertStatus(200);
+    }
+
+        public function test_if_booking_can_delete(): void
+    {
+        $response = $this->delete('api/booking/3');
         $response->assertStatus(200);
     }
 }

@@ -3,7 +3,6 @@
 
 // use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
-
 class InvoiceTest extends TestCase
 {
     /**
@@ -26,6 +25,12 @@ class InvoiceTest extends TestCase
             'total' => '50000',
             'paymentDate' => '2023-03-27 11:28:41',
         ]);
+        $response->assertStatus(200);
+    }
+
+    public function test_if_invoice_can_delete(): void
+    {
+        $response = $this->delete('api/invoice/3');
         $response->assertStatus(200);
     }
 }

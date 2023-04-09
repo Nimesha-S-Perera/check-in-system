@@ -12,13 +12,17 @@ class RoomWithGuestResource extends JsonResource
      *
      * @return array<string, mixed>
      */
+
     public function toArray(Request $request): array
     {
         return [
             'roomNo' => $this->roomNo,
-            'roomSuite' => $this->roomSuite,
+            'roomType' => $this->roomType,
             'status' => $this->status,
-            'guest' => $this->when($this->status == 1, [
+            'checkInDate'=>$this->checkInDate,
+            'checkOutDate'=>$this->checkOutDate,
+            'stayType'=>$this->stayType,
+            'guest' => $this->when($this->status == "Booked", [
                 'name' => $this->name,
                 'nic' => $this->nic,
                 'contactNumber' => $this->contactNumber

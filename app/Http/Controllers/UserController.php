@@ -31,7 +31,7 @@ class UserController extends Controller
      */
     public function store(StoreuserRequest $request)
     {
-        //
+        user::create($request->all());
     }
 
     /**
@@ -63,8 +63,8 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(user $user)
+    public function destroy(user $user,int $id)
     {
-        //
+        $user::destroy($id);
     }
 }

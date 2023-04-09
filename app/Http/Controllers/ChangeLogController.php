@@ -31,7 +31,7 @@ class ChangeLogController extends Controller
      */
     public function store(StoreChangeLogRequest $request)
     {
-        //
+
     }
 
     /**

@@ -17,9 +17,25 @@ class PackageTest extends TestCase
         $response->assertStatus(200);
     }
 
+    public function test_if_new_package_can_be_added(): void
+    {
+        $response = $this->post('api/package',[
+            'stayType' => 'FB',
+            'roomType' => 'Deluxe',
+            'price' => 22000,
+        ]);
+        $response->assertStatus(200);
+    }
+
     public function test_if_package_can_update(): void
     {
         $response = $this->put('api/package/2',['' => '']);
+        $response->assertStatus(200);
+    }
+
+    public function test_if_package_can_delete(): void
+    {
+        $response = $this->delete('api/package/3');
         $response->assertStatus(200);
     }
 }

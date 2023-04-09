@@ -16,4 +16,22 @@ class InvoiceDetailTest extends TestCase
         dd($bookingsdetails);
         $response->assertStatus(200);
     }
+
+    public function test_if_new_invoice_details_can_be_added(): void
+    {
+        $response = $this->post('api/invoiceDetail',[
+            'invoiceID' => 2,
+            'description' => 'Lunch',
+            'quantity' => 4,
+            'unitPrice' => 1000,
+            'total' => 4000
+        ]);
+        $response->assertStatus(200);
+    }
+
+    public function test_if_invoice_details_can_delete(): void
+    {
+        $response = $this->delete('api/invoiceDetails/3');
+        $response->assertStatus(200);
+    }
 }

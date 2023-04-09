@@ -61,8 +61,8 @@ class InvoiceDetailController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(InvoiceDetail $invoiceDetails)
+    public function destroy(InvoiceDetail $invoiceDetails,int $id)
     {
-        //
+        $invoiceDetails::destroy($id);
     }
 }

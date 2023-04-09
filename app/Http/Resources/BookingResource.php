@@ -14,10 +14,13 @@ class BookingResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-       return[
+        return [
             'id' => $this->id,
-            'room' => RoomResource::collection($this->room()->get()),
-            'guest' => GuestResource::collection($this->guest()->get()),
+            'room' => new RoomResource($this->room),
+            'guest' => new GuestResource($this->guest),
+            'checkInDate' => $this->checkInDate,
+            'checkOutDate' => $this->checkOutDate,
+            'stayType' => $this->stayType,
         ];
     }
 }

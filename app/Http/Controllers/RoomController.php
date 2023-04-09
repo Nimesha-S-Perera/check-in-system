@@ -30,10 +30,10 @@ class RoomController extends Controller
     public function show(StoreroomRequest $request)
     {
         //to get the roomsuite
-        $roomSuite = $request->input('roomSuite');
+        $roomType = $request->input('roomType');
 
-        $availableRooms = Room::where('status', 0)
-            ->where('roomSuite', $roomSuite)
+        $availableRooms = Room::where('status', 'Available')
+            ->where('roomType', $roomType)
             ->pluck('roomNo');
 
         $availableRoomCollection = collect($availableRooms);
@@ -69,7 +69,7 @@ class RoomController extends Controller
      */
     public function store(StoreroomRequest $request)
     {
-        //
+        room::create($request->all());
     }
 
     /**
@@ -85,8 +85,8 @@ class RoomController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(room $room)
+    public function destroy(room $room,int $id)
     {
-        //
+        $room::destroy($id);
     }
 }

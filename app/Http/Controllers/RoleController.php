@@ -31,7 +31,7 @@ class RoleController extends Controller
      */
     public function store(StoreRoleRequest $request)
     {
-        //
+        Role::create($request->all());
     }
 
     /**
@@ -63,8 +63,8 @@ class RoleController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Role $role)
+    public function destroy(Role $role,int $id)
     {
-        //
+        $role::destroy($id);
     }
 }

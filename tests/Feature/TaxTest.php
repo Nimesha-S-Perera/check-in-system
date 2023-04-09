@@ -17,6 +17,15 @@ class TaxTest extends TestCase
         $response->assertStatus(200);
     }
 
+    public function test_if_new_tax_can_be_added(): void
+    {
+        $response = $this->post('api/tax',[
+            'name' => 'GAT',
+            'taxRate' => 20
+        ]);
+        $response->assertStatus(200);
+    }
+
     public function test_if_tax_can_view(): void
     {
         $response = $this->get('api/tax');
@@ -28,6 +37,12 @@ class TaxTest extends TestCase
     public function test_if_package_can_update(): void
     {
         $response = $this->put('api/tax/2',['' => '']);
+        $response->assertStatus(200);
+    }
+
+    public function test_if_tax_can_delete(): void
+    {
+        $response = $this->delete('api/tax/3');
         $response->assertStatus(200);
     }
 }

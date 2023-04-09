@@ -20,6 +20,7 @@ class booking extends Model
     {
         return $this->belongsTo('App\Models\guest','guestID');
     }
+
     public $timestamps = false;
     protected $fillable = [
         'roomID',

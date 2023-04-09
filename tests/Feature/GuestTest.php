@@ -17,9 +17,26 @@ class GuestTest extends TestCase
         dd($bookingsdetails);
         $response->assertStatus(200);
     }
+
+    public function test_if_new_guest_can_be_added(): void
+    {
+        $response = $this->post('api/guest',[
+            'name' => 'Nimesha Perera',
+            'nic' => '123456789012',
+            'contactNumber' => '0771234567',
+        ]);
+        $response->assertStatus(200);
+    }
+
     public function test_if_guest_can_update(): void
     {
         $response = $this->put('api/guest/2',['name' => 'Nimesha Perera']);
+        $response->assertStatus(200);
+    }
+
+    public function test_if_guest_can_delete(): void
+    {
+        $response = $this->delete('api/guest/3');
         $response->assertStatus(200);
     }
 }

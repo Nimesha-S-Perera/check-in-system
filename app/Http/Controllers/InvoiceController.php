@@ -68,8 +68,8 @@ class InvoiceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Invoice $invoice)
+    public function destroy(Invoice $invoice,int $id)
     {
-        //
+        $invoice::destroy($id);
     }
 }

@@ -8,7 +8,9 @@ use App\Models\booking;
 use App\Http\Requests\StorebookingRequest;
 use App\Http\Requests\UpdatebookingRequest;
 use App\Models\guest;
+use App\Models\Invoice;
 use App\Models\room;
+use App\Models\Tax;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -21,11 +23,11 @@ class BookingController extends Controller
             $room_data_with_current_guest = DB::table('rooms')
                 ->leftJoin('bookings', function($join) {
                     $join->on('rooms.roomNo', '=', 'bookings.roomID')
-                        ->where('rooms.status', 1)
+                        ->where('rooms.status', 'Booked')
                         ->whereRaw('bookings.id = (select max(id) from bookings where bookings.roomID = rooms.roomNo)');
                 })
                 ->leftJoin('guests', 'bookings.guestID', '=', 'guests.id')
-                ->select('rooms.*',
+                ->select('rooms.*','bookings.*',
                     DB::raw('IFNULL(guests.name, null) as name'),
                     DB::raw('IFNULL(guests.nic, null) as nic'),
                     DB::raw('IFNULL(guests.contactNumber, null) as contactNumber'))
@@ -45,37 +47,49 @@ class BookingController extends Controller
             'name' => 'required|string|100',
             'nic' => 'required|string|12',
             'contactNumber' => 'required|string|20',
-            'userID' => 'required|integer',
             'checkInDate' => 'required|date',
             'checkOutDate' => 'required|date',
             'stayType' => 'required|integer',
         ];
     }
     //To add new check in
-    public function store(StorebookingRequest $request, Guest $guest, Booking $booking, Room $room)
-    {
+    public function store(StorebookingRequest $request, Guest $guest, Booking $booking, Room $room, Invoice $invoice, Tax $tax){
+
+
+        $roomID = $request->input('roomID');
         $Guest = $guest->create([
             'name' => $request->input('name'),
             'nic' => $request->input('nic'),
             'contactNumber' => $request->input('contactNumber')
         ]);
 
-        $booking->create([
-            'roomID' => $request->input('roomID'),
-            'userID' => $request->input('userID'),
+        $booking = $booking->create([
+            'roomID' => $roomID,
+            'guestID' => $Guest->id,
+            'stayType' => $request->input('stayType'),
             'checkInDate' => $request->input('checkInDate'),
             'checkOutDate' => $request->input('checkOutDate'),
-            'stayType' => $request->input('stayType'),
             'actualCheckOutDate' => null,
-            'guestID' => $Guest->id
+            'userID' => $request->input('userID'),
+
         ]);
 
-        $Room = $room->findOrFail($request->input('roomID'));
-        $Room->status = 1;
-        $Room->save();
+        $taxRate = $tax::pluck('taxRate')->first();
 
+        $invoice->create([
+            'bookingID' => $booking->id,
+            'packageID' => $request->input('packageID'),
+            'tax' => $taxRate,
+            'total' => $request->input('total'),
+        ]);
+
+
+        $Room = $room->findOrFail($roomID);
+        $Room->status = 'Booked';
+        $Room->save();
         DB::commit();
     }
+
 
     public function create()
     {
@@ -109,8 +123,8 @@ class BookingController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(booking $booking)
+    public function destroy(booking $booking,int $id)
     {
-        //
+        $booking::destroy($id);
     }
 }

@@ -31,7 +31,7 @@ class PackageController extends Controller
      */
     public function store(StorePackageRequest $request)
     {
-        //
+        Package::create($request->all());
     }
 
     /**
@@ -63,8 +63,8 @@ class PackageController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Package $package)
+    public function destroy(Package $package,int $id)
     {
-        //
+        $package::destroy($id);
     }
 }

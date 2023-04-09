@@ -17,9 +17,23 @@ class RoleTest extends TestCase
         $response->assertStatus(200);
     }
 
+    public function test_if_new_role_can_be_added(): void
+    {
+        $response = $this->post('api/role',[
+            'roleType' => 'Security',
+        ]);
+        $response->assertStatus(200);
+    }
+
     public function test_if_role_can_update(): void
     {
         $response = $this->put('api/role/2',['' => '']);
+        $response->assertStatus(200);
+    }
+
+    public function test_if_role_can_delete(): void
+    {
+        $response = $this->delete('api/role/3');
         $response->assertStatus(200);
     }
 }
