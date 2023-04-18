@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ChangeLogController;
 use App\Http\Controllers\ChangeLogDetailController;
@@ -59,6 +60,8 @@ Route::delete('/user/{id}',[UserController::class, 'destroy']);
 Route::get('/guests', [GuestController::class, 'index']);
 
 Route::post('/guest',[GuestController::class, 'store']);
+
+Route::get('/guest/exist',[GuestController::class, 'show']);
 
 //To update an guest
 Route::put('/guest/{id}', [GuestController::class, 'update']);

@@ -23,7 +23,7 @@ class BookingController extends Controller
             $room_data_with_current_guest = DB::table('rooms')
                 ->leftJoin('bookings', function($join) {
                     $join->on('rooms.roomNo', '=', 'bookings.roomID')
-                        ->where('rooms.status', 'Booked')
+                        ->where('rooms.status', '1')
                         ->whereRaw('bookings.id = (select max(id) from bookings where bookings.roomID = rooms.roomNo)');
                 })
                 ->leftJoin('guests', 'bookings.guestID', '=', 'guests.id')
@@ -31,7 +31,7 @@ class BookingController extends Controller
                     DB::raw('IFNULL(guests.name, null) as name'),
                     DB::raw('IFNULL(guests.nic, null) as nic'),
                     DB::raw('IFNULL(guests.contactNumber, null) as contactNumber'))
-                ->orderBy('rooms.roomNo', 'asc')
+                ->orderBy('bookings.id', 'desc')
                 ->get();
 
             return RoomWithGuestResource::collection($room_data_with_current_guest);
@@ -54,7 +54,6 @@ class BookingController extends Controller
     }
     //To add new check in
     public function store(StorebookingRequest $request, Guest $guest, Booking $booking, Room $room, Invoice $invoice, Tax $tax){
-
 
         $roomID = $request->input('roomID');
         $Guest = $guest->create([
@@ -85,7 +84,7 @@ class BookingController extends Controller
 
 
         $Room = $room->findOrFail($roomID);
-        $Room->status = 'Booked';
+        $Room->status = '1';
         $Room->save();
         DB::commit();
     }

@@ -23,7 +23,7 @@ class RoomTest extends TestCase
     public function test_if_all_available_rooms_with_correct_room_suite_can_view(): void
     {
         $response = $this->get('api/rooms/available',[
-            'roomType' => 1,
+            'roomType' => 'Deluxe',
         ]);
         $bookingsdetails = $response->json();
         dd($bookingsdetails);

@@ -12,10 +12,10 @@ class ChangeLogController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(ChangeLog $changeLog)
     {
-        $changeLog = ChangeLog::all();
-        return ChangeLogResource::collection($changeLog);
+        $ChangeLog = $changeLog::all();
+        return ChangeLogResource::collection($ChangeLog);
     }
 
     /**

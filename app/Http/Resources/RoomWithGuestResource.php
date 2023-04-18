@@ -22,7 +22,7 @@ class RoomWithGuestResource extends JsonResource
             'checkInDate'=>$this->checkInDate,
             'checkOutDate'=>$this->checkOutDate,
             'stayType'=>$this->stayType,
-            'guest' => $this->when($this->status == "Booked", [
+            'guest' => $this->when($this->status == "1", [
                 'name' => $this->name,
                 'nic' => $this->nic,
                 'contactNumber' => $this->contactNumber

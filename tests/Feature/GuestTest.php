@@ -39,4 +39,14 @@ class GuestTest extends TestCase
         $response = $this->delete('api/guest/3');
         $response->assertStatus(200);
     }
+
+    public function test_if_exsting_guest_can_view(): void
+    {
+        $response = $this->get('api/guest/exist',[
+            'nic' => '123456789012',
+        ]);
+        $bookingsdetails = $response->json();
+        dd($bookingsdetails);
+        $response->assertStatus(200);
+    }
 }

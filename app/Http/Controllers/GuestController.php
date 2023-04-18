@@ -40,9 +40,16 @@ class GuestController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(guest $guest)
+    public function show(StoreguestRequest $request,guest $guest)
     {
-        //
+        $nic = $request->input('nic');
+
+        $existingGuests = $guest::where('nic', $nic)
+            ->pluck('name','contactNumber');
+
+        $existingGuestsCollection = collect($existingGuests);
+
+        return $existingGuestsCollection;
     }
 
     /**
