@@ -13,8 +13,12 @@ return new class extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->id("roomNo");
-            $table->enum('roomType', [0 => 'Standard', 1 => 'Deluxe'])->nullable()->default(null);
-            $table->enum('status', [0 => 'Available', 1 => 'Booked'])->nullable()->default(null);
+            //0 => 'Standard', 1 => 'Deluxe'
+            $table->tinyInteger('roomType');
+            //$table->enum('roomType', [0 => 'Standard', 1 => 'Deluxe'])->nullable()->default(null);
+            //0 => 'Available', 1 => 'Booked'
+            $table->tinyInteger('roomType');
+            //$table->enum('status', [0 => 'Available', 1 => 'Booked'])->nullable()->default(null);
             $table->timestamp('created_at')->useCurrent();
         });
     }

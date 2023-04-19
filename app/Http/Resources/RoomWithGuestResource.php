@@ -30,7 +30,7 @@ class RoomWithGuestResource extends JsonResource
         ];
 
         /*
-         * $guest = null;
+          $guest = null;
 
         if ($this->status == "1" && $this->bookings->isNotEmpty()) {
             $guest = [
