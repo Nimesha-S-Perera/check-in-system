@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Resources\GuestResource;
 use App\Models\ChangeLog;
 use App\Models\ChangeLogDetail;
-use App\Models\guest;
+use App\Models\Guest;
 use App\Http\Requests\StoreguestRequest;
 use App\Http\Requests\UpdateguestRequest;
+use App\Models\Room;
 use Illuminate\Support\Facades\DB;
 
 class GuestController extends Controller
@@ -15,9 +16,9 @@ class GuestController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Guest $guest)
     {
-        $guests = guest::all();
+        $guests = $guest::all();
         return GuestResource::collection($guests);
     }
 
@@ -32,30 +33,27 @@ class GuestController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreguestRequest $request)
+    public function store(StoreguestRequest $request, Guest $guest)
     {
-        guest::create($request->all());
+        $guest::create($request->all());
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(StoreguestRequest $request,guest $guest)
+    public function show(StoreguestRequest $request, Guest $guest)
     {
         $nic = $request->input('nic');
-
         $existingGuests = $guest::where('nic', $nic)
-            ->pluck('name','contactNumber');
-
+            ->pluck('name', 'contactNumber');
         $existingGuestsCollection = collect($existingGuests);
-
         return $existingGuestsCollection;
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(guest $guest)
+    public function edit(Guest $guest)
     {
         //
     }
@@ -63,9 +61,9 @@ class GuestController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateguestRequest $request, int $id,ChangeLog $changeLog,ChangeLogDetail $changeLogDetail,room $room)
+    public function update(UpdateguestRequest $request, int $id, ChangeLog $changeLog, ChangeLogDetail $changeLogDetail, Room $room,Guest $guest)
     {
-        $updateGuest = guest::Find($id);
+        $updateGuest = $guest::Find($id);
         $updateGuest->update($request->all());
         $updateGuest->save();
 
@@ -93,7 +91,7 @@ class GuestController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(guest $guest,int $id)
+    public function destroy(Guest $guest, int $id)
     {
         $guest::destroy($id);
     }

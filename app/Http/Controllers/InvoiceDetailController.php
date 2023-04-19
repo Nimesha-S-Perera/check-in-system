@@ -12,9 +12,9 @@ class InvoiceDetailController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(InvoiceDetail $invoiceDetail)
     {
-        $invoiceDetails = InvoiceDetail::all();
+        $invoiceDetails = $invoiceDetail::all();
         return InvoiceDetailResource::collection($invoiceDetails);
     }
 
@@ -61,7 +61,7 @@ class InvoiceDetailController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(InvoiceDetail $invoiceDetails,int $id)
+    public function destroy(InvoiceDetail $invoiceDetails, int $id)
     {
         $invoiceDetails::destroy($id);
     }

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Http\Requests\StorebookingRequest;
 use App\Http\Resources\RoomResource;
-use App\Models\room;
+use App\Models\Room;
 use App\Http\Requests\StoreroomRequest;
 use App\Http\Requests\UpdateroomRequest;
 use http\Env\Request;
@@ -17,9 +17,9 @@ class RoomController extends Controller
      * Display a listing of the resource.
      */
     //To view all rooms
-    public function index()
+    public function index(Room $room)
     {
-        $rooms = room::all();
+        $rooms = $room::all();
         return RoomResource::collection($rooms);
     }
 
@@ -27,12 +27,12 @@ class RoomController extends Controller
      * Display the specified resource.
      */
     //To get the available rooms
-    public function show(StoreroomRequest $request)
+    public function show(StoreroomRequest $request, Room $room)
     {
         //to get the roomsuite
         $roomType = $request->input('roomType');
 
-        $availableRooms = Room::where('status', 'Available')
+        $availableRooms = $room::where('status', 'Available')
             ->where('roomType', $roomType)
             ->pluck('roomNo');
 
@@ -45,7 +45,7 @@ class RoomController extends Controller
      * Update the specified resource in storage.
      */
     //To update the room status after checkout
-    public function update(UpdateroomRequest $request, room $room)
+    public function update(UpdateroomRequest $request, Room $room)
     {
         //$checkOutDate = $request->input('checkOutDate');
         //$dateTime = Carbon::now()->format('Y-m-d');
@@ -67,25 +67,24 @@ class RoomController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreroomRequest $request)
+    public function store(StoreroomRequest $request,Room $room)
     {
-        room::create($request->all());
+        $room::create($request->all());
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(room $room)
+    public function edit(Room $room)
     {
         //
     }
 
 
-
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(room $room,int $id)
+    public function destroy(Room $room, int $id)
     {
         $room::destroy($id);
     }

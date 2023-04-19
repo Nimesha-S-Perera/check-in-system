@@ -12,9 +12,9 @@ class TaxController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Tax $tax)
     {
-        $taxes = Tax::all();
+        $taxes = $tax::all();
         return TaxResource::collection($taxes);
     }
 
@@ -22,9 +22,9 @@ class TaxController extends Controller
      * Display the specified resource.
      */
     //to send tax rate to front end
-    public function show()
+    public function show(Tax $tax)
     {
-        $tax = Tax::get();
+        $tax = $tax::get();
         return TaxResource::collection($tax);
     }
 
@@ -39,11 +39,10 @@ class TaxController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreTaxRequest $request)
+    public function store(StoreTaxRequest $request,Tax $tax)
     {
-        Tax::create($request->all());
+        $tax::create($request->all());
     }
-
 
 
     /**
@@ -57,9 +56,9 @@ class TaxController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTaxRequest $request, int $id)
+    public function update(UpdateTaxRequest $request, int $id,Tax $tax)
     {
-        $updateTax = Tax::Find($id);
+        $updateTax = $tax::Find($id);
         $updateTax->update($request->all());
         $updateTax->save();
     }
@@ -67,7 +66,7 @@ class TaxController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Tax $tax,int $id)
+    public function destroy(Tax $tax, int $id)
     {
         $tax::destroy($id);
     }

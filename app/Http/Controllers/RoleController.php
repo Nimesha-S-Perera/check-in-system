@@ -12,9 +12,9 @@ class RoleController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Role $role)
     {
-        $roles = Role::all();
+        $roles = $role::all();
         return RoleResource::collection($roles);
     }
 
@@ -29,9 +29,9 @@ class RoleController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreRoleRequest $request)
+    public function store(StoreRoleRequest $request, Role $role)
     {
-        Role::create($request->all());
+        $role::create($request->all());
     }
 
     /**
@@ -53,9 +53,9 @@ class RoleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateRoleRequest $request, int $id)
+    public function update(UpdateRoleRequest $request, int $id,Role $role)
     {
-        $updateRole = Role::Find($id);
+        $updateRole = $role::Find($id);
         $updateRole->update($request->all());
         $updateRole->save();
     }
@@ -63,7 +63,7 @@ class RoleController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Role $role,int $id)
+    public function destroy(Role $role, int $id)
     {
         $role::destroy($id);
     }

@@ -12,9 +12,9 @@ class PackageController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Package $package)
     {
-        $packages = Package::all();
+        $packages = $package::all();
         return PackageResource::collection($packages);
     }
 
@@ -29,9 +29,9 @@ class PackageController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePackageRequest $request)
+    public function store(StorePackageRequest $request, Package $package)
     {
-        Package::create($request->all());
+        $package::create($request->all());
     }
 
     /**
@@ -53,9 +53,9 @@ class PackageController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePackageRequest $request, int $id)
+    public function update(UpdatePackageRequest $request, int $id, Package $package)
     {
-        $updatePackage = Package::Find($id);
+        $updatePackage = $package::Find($id);
         $updatePackage->update($request->all());
         $updatePackage->save();
     }
@@ -63,7 +63,7 @@ class PackageController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Package $package,int $id)
+    public function destroy(Package $package, int $id)
     {
         $package::destroy($id);
     }

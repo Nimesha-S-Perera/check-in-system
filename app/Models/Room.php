@@ -5,17 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class room extends Model
+class Room extends Model
 {
     protected $table = 'rooms';
     protected $primaryKey = 'roomNo';
     use HasFactory;
 
-    /*
-    public function guest()
-    {
-        return $this->hasOne('App\Models\guest', 'roomID' ,'roomNo');
-    }*/
     public $timestamps = false;
 
     public function bookings()

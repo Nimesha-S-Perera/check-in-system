@@ -12,9 +12,9 @@ class InvoiceController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Invoice $invoice)
     {
-        $invoice = Invoice::all();
+        $invoice = $invoice::all();
         return InvoiceResource::collection($invoice);
     }
 
@@ -29,7 +29,7 @@ class InvoiceController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreInvoiceRequest $request,Invoice $invoice)
+    public function store(StoreInvoiceRequest $request, Invoice $invoice)
     {
         $invoice = new Invoice();
         $invoice->bookingID = $request->input('bookingID');
@@ -68,7 +68,7 @@ class InvoiceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Invoice $invoice,int $id)
+    public function destroy(Invoice $invoice, int $id)
     {
         $invoice::destroy($id);
     }
