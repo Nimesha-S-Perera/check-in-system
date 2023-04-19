@@ -18,9 +18,9 @@ class room extends Model
     }*/
     public $timestamps = false;
 
-    public function booking()
+    public function bookings()
     {
-        return $this->hasMany('App\Models\booking');
+        return $this->hasMany('App\Models\booking','roomID');
     }
 
     protected $fillable = [

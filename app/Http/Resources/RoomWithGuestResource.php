@@ -29,5 +29,27 @@ class RoomWithGuestResource extends JsonResource
             ], null)
         ];
 
+        /*
+         * $guest = null;
+
+        if ($this->status == "1" && $this->bookings->isNotEmpty()) {
+            $guest = [
+                'name' => $this->bookings->first()->guest ? $this->bookings->first()->guest->name : null,
+                'nic' => $this->bookings->first()->guest ? $this->bookings->first()->guest->nic : null,
+                'contactNumber' => $this->bookings->first()->guest ? $this->bookings->first()->guest->contactNumber : null,
+            ];
+        }
+
+        return [
+            'roomNo' => $this->roomNo,
+            'roomType' => $this->roomType,
+            'status' => $this->status,
+            'checkInDate' => $this->bookings->isNotEmpty() ? $this->bookings->first()->checkInDate : null,
+            'checkOutDate' => $this->bookings->isNotEmpty() ? $this->bookings->first()->checkOutDate : null,
+            'stayType' => $this->bookings->isNotEmpty() ? $this->bookings->first()->stayType : null,
+            'guest' => $guest,
+        ];
+        */
+
     }
 }

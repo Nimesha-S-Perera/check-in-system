@@ -35,6 +35,13 @@ class BookingController extends Controller
                 ->get();
 
             return RoomWithGuestResource::collection($room_data_with_current_guest);
+            /*
+               $rooms = Room::with(['bookings' => function ($query) {
+                $query->orderBy('id','desc')->latest();
+            }, 'bookings.guest'])->get();
+
+            return RoomWithGuestResource::collection($rooms);
+             */
         } else {
             $bookings = Booking::with('room', 'guest')->get();
             return BookingResource::collection($bookings);

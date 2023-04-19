@@ -11,7 +11,7 @@ class guest extends Model
     protected $table = 'guests';
     use HasFactory;
     public $timestamps = false;
-    public function booking()
+    public function bookings()
     {
         return $this->hasMany('App\Models\booking');
     }
